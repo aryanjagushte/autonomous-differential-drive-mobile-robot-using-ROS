@@ -1,0 +1,18 @@
+<launch>
+  <!--robot description for urdf-->
+  <include file="$(find diff_drive_robot_description)/launch/robot_description.launch"/>
+
+  <!-- gazebo empty world launch file with custom world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find diff_drive_robot_description)/worlds/simple.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- gazebo simulator -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model diff_drive_robot" output="screen"/>
+</launch>
+
